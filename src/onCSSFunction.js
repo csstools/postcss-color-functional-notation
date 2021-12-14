@@ -92,8 +92,14 @@ const isAlphaLikeUnit = createRegExpTest(/^%?$/i)
 /** Return whether the unit is hue-like. */
 const isHueLikeUnit = createRegExpTest(/^(deg|grad|rad|turn)?$/i)
 
+/** Return whether the function name is `var`. */
+const isVarFunctionName = createRegExpTest(/^var$/i)
+
 /** @type {(node: CSSNumber) => boolean} Return whether the node is an Alpha-like unit. */
-const isAlphaValue = node => isCalc(node) || node.type === 'numeric' && isAlphaLikeUnit(node.unit)
+const isAlphaValue = node => isVar(node) || isCalc(node) || node.type === 'numeric' && isAlphaLikeUnit(node.unit)
+
+/** @type {(node: CSSFunction) => boolean} Return whether the node is a var() function. */
+const isVar = node => node.type === 'func' && isVarFunctionName(node.name)
 
 /** @type {(node: CSSFunction) => boolean} Return whether the node is a calc() function. */
 const isCalc = node => node.type === 'func' && isCalcFunctionName(node.name)

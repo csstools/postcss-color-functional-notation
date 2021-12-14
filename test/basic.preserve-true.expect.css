@@ -20,6 +20,13 @@
 	color: rgba(178 34 34 / .5);
 }
 
+.test-rgb-functions {
+	color: rgba(178, 34, 34, var(--text-opacity));
+	color: rgb(178 34 34 / var(--text-opacity));
+	color: rgba(178, 34, 34, calc(1 / 2));
+	color: rgb(178 34 34 / calc(1 / 2));
+}
+
 .test-rgb-percentages {
 	color: rgb(178, 34, 34);
 	color: rgba(70% 13.5% 13.5%);
